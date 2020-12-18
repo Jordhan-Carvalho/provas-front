@@ -52,7 +52,7 @@ const MainContainer = styled.div`
   padding: 30px 20px;
   margin: 0px 10px;
   flex-grow: 1;
-  max-height: 500px;
+  height: 500px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 4px;

@@ -4,6 +4,7 @@ import axios from "axios";
 
 import searchSvg from "../../assets/search.svg";
 import ContentBox from "../../components/ContentBox";
+import Spinner from "../../components/Spinner";
 import InfoDipslay from "./InfoDipslay";
 import SearchMode from "./SearchMode";
 
@@ -13,6 +14,7 @@ export default function TestsPage() {
   const [step, setStep] = useState("p");
   const [savedProfId, setSavedProfId] = useState("");
   const [savedClassId, setSavedClassId] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setSavedProfId("");
@@ -54,6 +56,7 @@ export default function TestsPage() {
   };
 
   const fetchProfessors = async () => {
+    setIsLoading(true);
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_BACKURL}/api/tests/professors`
@@ -63,9 +66,11 @@ export default function TestsPage() {
     } catch (e) {
       console.log(e);
     }
+    setIsLoading(false);
   };
 
   const fetchTerms = async () => {
+    setIsLoading(true);
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_BACKURL}/api/terms`
@@ -75,6 +80,7 @@ export default function TestsPage() {
     } catch (e) {
       console.log(e);
     }
+    setIsLoading(false);
   };
 
   const fetchCatsByClassId = async (classId) => {
@@ -136,7 +142,12 @@ export default function TestsPage() {
     <MainContainer>
       <ContentBox>
         <SearchMode setSelected={setSelected} />
-        <InfoDipslay data={dataArray} setNewData={setNewData} step={step} />
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <InfoDipslay data={dataArray} setNewData={setNewData} step={step} />
+        )}
+
         <SearchSvg src={searchSvg} />
       </ContentBox>
     </MainContainer>
