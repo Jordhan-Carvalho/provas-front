@@ -153,7 +153,7 @@ export default function Form() {
       </div>
       <BtnContainer>
         <Button disable={isLoading} form="add-form" type="submit">
-          "Fazer Upload"
+          Fazer Upload
         </Button>
       </BtnContainer>
     </FormContainer>

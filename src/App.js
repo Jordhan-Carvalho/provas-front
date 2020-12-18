@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import TestUploadPage from "./pages/TestUploadPage/TestUploadPage";
 import LandingPage from "./pages/LandingPage";
 import Header from "./components/Header";
-import TestsPage from "./pages/TestsPage";
+import TestsPage from "./pages/TestsPage/TestsPage";
 
 function App() {
   return (
