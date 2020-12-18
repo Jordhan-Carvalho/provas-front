@@ -136,7 +136,7 @@ export default function TestsPage() {
     <MainContainer>
       <ContentBox>
         <SearchMode setSelected={setSelected} />
-        <InfoDipslay data={dataArray} setNewData={setNewData} />
+        <InfoDipslay data={dataArray} setNewData={setNewData} step={step} />
         <SearchSvg src={searchSvg} />
       </ContentBox>
     </MainContainer>

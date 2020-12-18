@@ -1,18 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-export default function InfoDipslay({ data, setNewData }) {
+export default function InfoDipslay({ data, setNewData, step }) {
+  const [text, setText] = useState("");
+  const history = useHistory();
+
+  useEffect(() => {
+    getText();
+  }, [step]);
+
+  const getText = () => {
+    if (
+      step === "p" ||
+      step === "p.cat" ||
+      step === "t.c" ||
+      step === "t.c.cat"
+    )
+      setText(" prova(s)");
+    else if (step === "t") setText(" disciplina(s)");
+    else setText("");
+  };
+
   return (
     <MainContainer>
-      {data.map((item) => (
-        <ItemContainer
-          key={item.id}
-          onClick={() => setNewData(item.test_url ? item.test_url : item.id)}
-        >
-          <p>{item.name}</p>
-          <p>{item.semester ? item.semester : item.count}</p>
+      {data.length === 0 ? (
+        <ItemContainer onClick={() => history.push("/test-upload")}>
+          <p>Sem provas nessa sessão, adicione a primeira</p>
         </ItemContainer>
-      ))}
+      ) : (
+        data.map((item) => (
+          <ItemContainer
+            key={item.id}
+            onClick={() => setNewData(item.test_url ? item.test_url : item.id)}
+          >
+            <p>{item.name}</p>
+            <p>
+              {item.semester ? item.semester : item.count}
+              {text}
+            </p>
+          </ItemContainer>
+        ))
+      )}
     </MainContainer>
   );
 }
